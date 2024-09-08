@@ -27,12 +27,3 @@ def download_images(image_urls, save_dir="images"):
     
     return save_dir
 
-# Example usage
-image_urls = [
-    'https://bucket-api.domain.com.au/v1/bucket/image/2019438658_1_1_240821_040852-w1920-h1280',
-    'https://bucket-api.domain.com.au/v1/bucket/image/2019438658_2_1_240821_040852-w1920-h1280',
-    # Add more URLs as needed
-]
-
-downloaded_folder = download_images(image_urls)
-print(f"Images are downloaded in the folder: {downloaded_folder}")

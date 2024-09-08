@@ -44,14 +44,3 @@ class Get_infor(object):
         imgs = property_data['images']
         return imgs
 
-
-
-
-# Load the content of the file
-file_path = '/home/minh/Documents/Code/python/aihomegroup/input_for_Nazib.txt'
-with open(file_path, 'r', encoding='utf-8') as file:
-    file_content = file.read()
-test = Property(file_content)
-# Extract property information
-property_info = test.extract_agent_infor(file_content)
-print(property_info)
