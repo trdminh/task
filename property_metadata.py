@@ -1,43 +1,39 @@
+import json
 import re
 
+class Property(object):
+    def __init__(self,file):
+        self.file = file
+    
+    def extract_property_infor(self,file):
+        property_data_match = re.search(r'"property":\{.*?\}', file)
+        if not property_data_match: return None
 
-def extract_address(filename):
-    match = re.search(r'<meta property="og:title" content="(.+?)\s\|', filename)
-    return match.group(1)
+        property_data_json = "{" + property_data_match.group(0) + "}"
+
+        property_data = json.loads(property_data_json)['property']
+
+        return property_data
 
 
-def extract_number_of_bedroom(filename):
-    match = re.search(r'"bedrooms":(\d+)', filename)
-    return int(match.group(1))
 
-def extract_number_of_bathroom(filename):
-    match = re.search(r'"bathrooms":(\d+)', filename)
-    return int(match.group(1))
+# Load the content of the file
+file_path = '/home/minh/Documents/Code/python/aihomegroup/input_for_Nazib.txt'
+with open(file_path, 'r', encoding='utf-8') as file:
+    file_content = file.read()
+test = Property(file_content)
+# Extract property information
+property_info = test.extract_property_infor(file_content)
+print(property_info)
 
-def extract_number_of_garage(filename):
-    match = re.search(r'"parking":(\d+)', filename)
-    return int(match.group(1))
 
-def extract_property_type(filename):
-    match = re.search(r'"primaryPropertyType":"(\w+)"', filename)
-    return match.group(1) 
+def extract_phone_number(text):
+    # Regular expression to match phone numbers
+    phone_match = re.search(r"\(?\+?\d{1,3}\)?[\s\-]?\(?\d{1,4}\)?[\s\-]?\d{1,4}[\s\-]?\d{1,4}", text)
+    phone_number = phone_match.group(0) if phone_match else "N/A"
+    return phone_number
 
-def extract_date_auction(filename):
-    match = re.search(r'"price":"(.+?)"', filename)
-    return match.group(1)
 
-def extract_metadata_property(text):
-    return {
-        "dia_chi": extract_address(text),
-        "phong_ngu": extract_number_of_bedroom(text),
-        "phong_tam": extract_number_of_bathroom(text),
-        "cho_do_xe": extract_number_of_garage(text),
-        "loai_bat_dong_san": extract_property_type(text),
-        "ngay_dau_gia": extract_date_auction(text)
-    }
-
-with open('/home/minh/Documents/Code/python/aihomegroup/input_for_Nazib.txt', 'r') as file:
-    text = file.read()
-metadata = extract_metadata_property(text)
-print(metadata)
-
+# Extract phone number
+agent_phone_number = extract_phone_number(file_content)
+print(f"Agent's Phone Number: {agent_phone_number}")
