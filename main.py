@@ -23,7 +23,7 @@ property_if['agents']   = agent_infor
 property_if['property'] = property_data
 property_if['schools']  = schools_infor
 print(property_if)
-with open('output.txt','w') as f:
+with open('output.json','w') as f:
     json.dump(property_if, f, indent=0)
 # Download image
 
