@@ -24,7 +24,17 @@ class Property(object):
         agent_data = json.loads(agent_data_json)['agents']
 
         return agent_data
+    
+    def extract_schools_infor(self,file):
+        schools_data_match = re.search(r'"schools":\[.*?]',file)
 
+        if not schools_data_match: return None
+
+        schools_data_json = "{" + schools_data_match.group(0) + "}"
+
+        schools_data = json.loads(schools_data_json)['schools']
+
+        return schools_data
 class Get_infor(object):
     def __init__(self,property_data):
         self.property_data = property_data
