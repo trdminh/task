@@ -24,7 +24,7 @@ property_if['property'] = property_data
 property_if['schools']  = schools_infor
 print(property_if)
 with open('output.json','w') as f:
-    json.dump(property_if, f, indent=0)
+    json.dump(property_if, f, indent=2)
 # Download image
 
 imgs_folder = download_img.download_images(images)
